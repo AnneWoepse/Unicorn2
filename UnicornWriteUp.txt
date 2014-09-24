@@ -1,0 +1,6 @@
+2.
+In step two I utilized the Pull-Up Method to eliminate the duplicate code.  I made a new method called, UnicornActivity.java that extends Activity and added the methods, onCreateOptionsMenu and onOptionsItemSelected.  I then removed these two methods from both MainActivity.java and GameActivity.java and had these classes extend UnicornActivity.java
+
+3.
+The first code smell is a message chain, as illustrated by line below seen in the method, onTouchEvent().
+    	if (!killed && x > imagePointX && x < imagePointX + width && y > imagePointY && y < imagePointY + height)
