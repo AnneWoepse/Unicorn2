@@ -2,4 +2,5 @@
 In step two I utilized the Pull-Up Method to eliminate the duplicate code.  I made a new method called, UnicornActivity.java that extends Activity and added the methods, onCreateOptionsMenu and onOptionsItemSelected.  I then removed these two methods from both MainActivity.java and GameActivity.java and had these classes extend UnicornActivity.java
 
 3.
-The first code smell is Primitive Obsession.... (should be point but represented as ints)
+The first code smell is Primitive Obsession.  We have two ints desribing an x and y value, however, these ints are not actually ints, they describe points, so we should be using the type Point to describe these values.
+The second code smell is Duplicate Code.  As a result of using ints to describe x and y values, you have two ArrayLists of ints to represent the x and y values of the point.  Due to this, you have duplicate code that adds both the x value to the x-array and the y value to the y-array.

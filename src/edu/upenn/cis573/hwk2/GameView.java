@@ -6,8 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.provider.ContactsContract.CommonDataKinds.Im;
@@ -16,19 +14,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-
 public class GameView extends View {
     private Bitmap image;
-    private ArrayList<Point> points = new ArrayList<Point>();
     private boolean killed = false;
     private boolean newUnicorn = true;
     private Point imagePoint = new Point(-150,100);
     private int score = 0;
     private int yChange = 0;
-    private static final int lineColor = Color.RED;
-    private static final int lineWidth = 10;
     public long startTime;
     public long endTime;
+    Stroke stroke = new Stroke();
 
     public GameView(Context context) {
 	    super(context);
@@ -49,7 +44,6 @@ public class GameView extends View {
      * It is also called after you call "invalidate" on this object.
      */
     protected void onDraw(Canvas canvas) {    	
-
     	// resets the position of the unicorn if one is killed or reaches the right edge
     	if (newUnicorn || imagePoint.x >= this.getWidth()) {
     		imagePoint.x = -150;
@@ -72,18 +66,8 @@ public class GameView extends View {
 
     	// draws the unicorn at the specified point
 		canvas.drawBitmap(image, imagePoint.x, imagePoint.y, null);
-    	
-		// draws the stroke
-    	if (points.size() > 1) {
-    		for (int i = 0; i < points.size()-1; i++) {
-    			Point start = points.get(i);
-    			Point stop = points.get(i+1);
-    			Paint paint = new Paint();
-    			paint.setColor(lineColor);
-    			paint.setStrokeWidth(lineWidth);
-    			canvas.drawLine(start.x, start.y, stop.x, stop.y, paint);
-    		}
-    	}
+		
+		stroke.pointToPointLine(canvas);
     	
     }
 
@@ -93,13 +77,13 @@ public class GameView extends View {
     public boolean onTouchEvent(MotionEvent event) {
     	
     	if (event.getAction() == MotionEvent.ACTION_DOWN) {
-    		points.add(new Point((int)event.getX(),(int)event.getY()));
+    		stroke.addPoint(new Point((int)event.getX(),(int)event.getY()));
     	}
     	else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-    		points.add(new Point((int)event.getX(),(int)event.getY()));
+    		stroke.addPoint(new Point((int)event.getX(),(int)event.getY()));
     	}
     	else if (event.getAction() == MotionEvent.ACTION_UP) {
-    		points.clear();
+    		stroke.points.clear();
     	}
     	else {
     		return false;
