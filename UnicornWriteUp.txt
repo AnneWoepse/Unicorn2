@@ -4,3 +4,10 @@ In step two I utilized the Pull-Up Method to eliminate the duplicate code.  I ma
 3.
 The first code smell is Primitive Obsession.  We have two ints desribing an x and y value, however, these ints are not actually ints, they describe points, so we should be using the type Point to describe these values.
 The second code smell is Duplicate Code.  As a result of using ints to describe x and y values, you have two ArrayLists of ints to represent the x and y values of the point.  Due to this, you have duplicate code that adds both the x value to the x-array and the y value to the y-array.
+
+6.
+I refactored GameView(Context context) and GameView(Context context, AttributeSet attributeSet) because both methods had duplicate code.  I used the Extract Method to refactor and put the code in a method called backgroundResource().  The code that was duplicated was as follows...
+
+		setBackgroundResource(R.drawable.space);
+		picture.drawUnicorn(getResources());
+

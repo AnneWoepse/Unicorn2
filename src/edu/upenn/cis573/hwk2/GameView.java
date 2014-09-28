@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.TextView;
 
 public class GameView extends View {
-	private Bitmap image;
 	private boolean killed = false;
 	private boolean newUnicorn = true;
 	private Point imagePoint = new Point(-150, 100);
@@ -28,12 +27,15 @@ public class GameView extends View {
 
 	public GameView(Context context) {
 		super(context);
-		setBackgroundResource(R.drawable.space);
-		picture.drawUnicorn(getResources());
+		backgroundResource();
 	}
 
 	public GameView(Context context, AttributeSet attributeSet) {
 		super(context, attributeSet);
+		backgroundResource();
+	}
+	
+	public void backgroundResource() {
 		setBackgroundResource(R.drawable.space);
 		picture.drawUnicorn(getResources());
 	}
