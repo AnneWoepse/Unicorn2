@@ -24,7 +24,7 @@ public class GameView extends View {
 	public long endTime;
 	Stroke stroke = new Stroke();
 	Image picture = new Image();
-
+	
 	public GameView(Context context) {
 		super(context);
 		backgroundResource();
@@ -34,10 +34,22 @@ public class GameView extends View {
 		super(context, attributeSet);
 		backgroundResource();
 	}
-	
+
 	public void backgroundResource() {
 		setBackgroundResource(R.drawable.space);
 		picture.drawUnicorn(getResources());
+	}
+	
+	public Point getImagePoint() {
+		return imagePoint;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public int getYChange() {
+		return yChange;
 	}
 
 	/*
@@ -109,47 +121,5 @@ public class GameView extends View {
 
 		return true;
 	}
-
-	/*
-	 * This inner class is responsible for making the unicorn appear to move.
-	 * When "exec" is called on an object of this class, "doInBackground" gets
-	 * called in a background thread. It just waits 10ms and then updates the
-	 * image's position. Then "onPostExecute" is called.
-	 */
-	class BackgroundDrawingTask extends AsyncTask<Integer, Void, Integer> {
-
-		// this method gets run in the background
-		protected Integer doInBackground(Integer... args) {
-			try {
-				// note: you can change these values to make the unicorn go
-				// faster/slower
-				Thread.sleep(10);
-				imagePoint.x += 10;
-				imagePoint.y += yChange;
-			} catch (Exception e) {
-			}
-			// the return value is passed to "onPostExecute" but isn't actually
-			// used here
-			return 1;
-		}
-
-		// this method gets run in the UI thread
-		protected void onPostExecute(Integer result) {
-			// redraw the View
-			invalidate();
-			if (score < 10) {
-				// need to start a new thread to make the unicorn keep moving
-				BackgroundDrawingTask task = new BackgroundDrawingTask();
-				task.execute();
-			} else {
-				// game over, man!
-				endTime = System.currentTimeMillis();
-				// these methods are deprecated but it's okay to use them...
-				// probably.
-				GameActivity.instance.removeDialog(1);
-				GameActivity.instance.showDialog(1);
-			}
-		}
-	}
-
+	
 }

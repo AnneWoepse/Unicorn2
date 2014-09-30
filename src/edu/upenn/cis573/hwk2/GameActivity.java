@@ -52,7 +52,7 @@ public class GameActivity extends UnicornActivity {
 	    	        	   dialog.cancel();
 	    	        	   // then start the unicorn moving across the screen
 	    	               GameView gv = (GameView)findViewById(R.id.gameView);
-	    	               GameView.BackgroundDrawingTask t = gv.new BackgroundDrawingTask();
+	    	               BackgroundDrawingTask t = new BackgroundDrawingTask(gv);
 	    	               t.execute();
 	    	               gv.startTime = System.currentTimeMillis();
 	    	           }
