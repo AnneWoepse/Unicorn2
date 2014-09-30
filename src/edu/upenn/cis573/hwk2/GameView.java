@@ -2,6 +2,7 @@ package edu.upenn.cis573.hwk2;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,10 +21,9 @@ public class GameView extends View {
 	private Point imagePoint = new Point(-150, 100);
 	private int score = 0;
 	private int yChange = 0;
-	public long startTime;
-	public long endTime;
 	Stroke stroke = new Stroke();
 	Image picture = new Image();
+	Activity parentActivity;
 	
 	public GameView(Context context) {
 		super(context);
