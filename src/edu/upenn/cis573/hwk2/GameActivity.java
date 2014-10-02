@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class GameActivity extends UnicornActivity {
 	
 	// a global, static instance so that the GameView object can refer to this object
-//	public static GameActivity instance;
+
 	public static GameView gv;
 	
 	// keeps track of the best time so far

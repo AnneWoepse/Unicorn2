@@ -1,14 +1,38 @@
-2.
+   Homework #2 Writeup	  |
+       Anne Woepse	      |
+---------------------------
+
+1. (Step 2)
 In step two I utilized the Pull-Up Method to eliminate the duplicate code.  I made a new method called, UnicornActivity.java that extends Activity and added the methods, onCreateOptionsMenu and onOptionsItemSelected.  I then removed these two methods from both MainActivity.java and GameActivity.java and had these classes extend UnicornActivity.java
 
-3.
+-----------------------------------------------------------------------------
+
+2. (Step 3)
 The first code smell is Primitive Obsession.  We have two ints desribing an x and y value, however, these ints are not actually ints, they describe points, so we should be using the type Point to describe these values.
 The second code smell is Duplicate Code.  As a result of using ints to describe x and y values, you have two ArrayLists of ints to represent the x and y values of the point.  Due to this, you have duplicate code that adds both the x value to the x-array and the y value to the y-array.
 
-6.
+-----------------------------------------------------------------------------
+
+3. (Step 6)
 I refactored GameView(Context context) and GameView(Context context, AttributeSet attributeSet) because both methods had duplicate code.  I used the Extract Method to refactor and put the code in a method called backgroundResource().  The code that was duplicated was as follows...
 
 		setBackgroundResource(R.drawable.space);
 		picture.drawUnicorn(getResources());
 
-10.
+-----------------------------------------------------------------------------
+
+4. (Step 10)
+In the onDraw(Canvas canvas) in the GameView class, the McCabe Cyclomatic Complexity metric improved.  Before refactoring, there were 3 decision points, so the MCC = 3 + 1 = 4.  After refactoring, there were only 2 decision points, and thus the MCC = 2 + 1 = 3.
+
+Before: MCC = 4
+After: MCC = 3
+IMPROVED!
+
+-----------------------------------------------------------------------------
+
+5. (Step 10)
+In the GameView class the Inter-Component Complexity worsened.  Before refactoring, fan-in = 1 because GameActivity() was the only class that access this method, and fan-out = 1 because it only accessed the GameActivity class.  So, before refactoring the instability was 1/2.  After refactoring, fan-in = 2 because BackgroundDraw() and GameActivity() accessed this class, and fan-out = 3 because it accessed the image class, the stroke class, and by motionEvent.  After refactoring the instability was 3/5.  The closer that the instability is to 1, the more instable the class, and the closer to 0 that the instability is, the more stable the class is.
+
+Before: Instability = 2/2+2 = 1/2
+After: Instability = 3/2+3 = 3/5
+WORSE!
