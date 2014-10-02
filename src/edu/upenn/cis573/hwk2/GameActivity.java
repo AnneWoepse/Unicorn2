@@ -14,7 +14,9 @@ import android.widget.Toast;
 public class GameActivity extends UnicornActivity {
 	
 	// a global, static instance so that the GameView object can refer to this object
-	public static GameActivity instance;
+//	public static GameActivity instance;
+	public static GameView gv;
+	
 	// keeps track of the best time so far
 	private static float bestTime = 1000000;
 	public long startTime;
@@ -25,14 +27,10 @@ public class GameActivity extends UnicornActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.play_game);
 		
-        instance = this;
+        gv.parentActivity = this;
         
         // this method is deprecated but, trust me, it's easier this way
         showDialog(0);
-	}
-	
-	static View getScoreboard() {
-		return instance.findViewById(R.id.scoreboard);
 	}
 	
     public void onButtonClick(View v) {

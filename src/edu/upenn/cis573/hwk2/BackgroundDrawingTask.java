@@ -44,8 +44,8 @@ public class BackgroundDrawingTask extends AsyncTask<Integer, Void, Integer> {
 				GameActivity.endTime = System.currentTimeMillis();
 				// these methods are deprecated but it's okay to use them...
 				// probably.
-				GameActivity.instance.removeDialog(1);
-				GameActivity.instance.showDialog(1);
+				gameView.parentActivity.removeDialog(1);
+				gameView.parentActivity.showDialog(1);
 			}
 		}
 	}

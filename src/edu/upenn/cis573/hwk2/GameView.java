@@ -23,13 +23,17 @@ public class GameView extends View {
 	private int yChange = 0;
 	Stroke stroke = new Stroke();
 	Image picture = new Image();
-	Activity parentActivity;
+	static Activity parentActivity;
 	
 	public GameView(Context context) {
 		super(context);
 		backgroundResource();
 	}
-
+	
+	static View getScoreboard() {
+		return parentActivity.findViewById(R.id.scoreboard);
+	}
+	
 	public GameView(Context context, AttributeSet attributeSet) {
 		super(context, attributeSet);
 		backgroundResource();
@@ -112,7 +116,7 @@ public class GameView extends View {
 				&& y > imagePoint.y && y < imagePoint.y + height) {
 			killed = true;
 			score++;
-			((TextView) (GameActivity.instance.getScoreboard())).setText(""
+			((TextView) (getScoreboard())).setText(""
 					+ score);
 		}
 

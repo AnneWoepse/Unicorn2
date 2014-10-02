@@ -11,3 +11,4 @@ I refactored GameView(Context context) and GameView(Context context, AttributeSe
 		setBackgroundResource(R.drawable.space);
 		picture.drawUnicorn(getResources());
 
+10.
